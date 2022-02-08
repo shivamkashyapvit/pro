@@ -1,0 +1,16 @@
+<div class="container">
+
+  <h1 class="form-header text-success">Add Product</h1>
+
+  <form #formdata="ngForm" (ngSubmit)="submit(formdata.value)">
+    <label>Title</label>
+    <input type="text" ngModel name="title">
+    <label>Price</label>
+    <input type="text" ngModel name="price">
+    <label>Description</label>
+    <input type="text" ngModel name="description">
+    <label>Image</label>
+    <input type="text" ngModel name="imageUrl">
+    <button type="submit">Add Product</button>
+  </form>
+</div>

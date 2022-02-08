@@ -1,0 +1,48 @@
+
+  <div class="header">
+    <div *ngIf="role==='admin' ; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+      <button class="btn btn-success" routerLink="/header/AddProduct">Add Product</button>
+    </ng-template>
+    &nbsp;
+    <ng-template #elseBlock>
+      <h1> Products </h1>
+    </ng-template>
+  </div>
+
+ <br>
+  
+    <div class="container">
+      <div class="card" style="width:400px" *ngFor="let products of getproducts">
+        <h2>{{products.title  }}</h2>
+        <img class="card-img-top" src="{{products.imageUrl}}" alt="Card image" style="width:100%">
+        <div class="card-body">
+          <h4 class="card-title">{{products.price}}</h4>
+          <p class="card-text">{{products.description}}</p>
+
+          <div *ngIf="role==='user' ; then thenBlock else elseBlock"></div>
+          <ng-template #thenBlock>
+            <select name="selectedQuantity" class="form-control bg-info" [(ngModel)]="products.quantity"
+              (change)="getQuantity($event,products)">
+              <option *ngFor="let option of options" [value]="option">{{option}}</option>
+            </select>
+
+            <button class="btn btn-danger" (click)=addtocart(products._id)>Add Cart </button> &nbsp;
+
+
+          </ng-template>
+
+          <ng-template #elseBlock>
+
+            <button class="btn btn-danger" (click)="delete(products._id)">Delete</button> &nbsp;
+            <button class="btn btn-danger" routerLink="/edit/{{products._id}}">Edit</button>
+
+          </ng-template>
+          <!-- <button class="btn btn-success" (click)=cartAdd(products)></button> -->
+        </div>
+      </div>
+    
+      <br>
+
+    </div>
+  
